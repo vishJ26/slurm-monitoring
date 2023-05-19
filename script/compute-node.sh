@@ -1,2 +1,2 @@
 sudo yum -y install docker
-mkdir test-folder
+sudo yum -y install nginx
