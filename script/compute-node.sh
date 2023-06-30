@@ -1,3 +1,4 @@
+#!/bin/bash
 # # #source the AWS ParallelCluster profile
 # # . /etc/parallelcluster/cfnconfig
 
