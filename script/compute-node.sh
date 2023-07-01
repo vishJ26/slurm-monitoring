@@ -2,8 +2,8 @@
 # # #source the AWS ParallelCluster profile
 . /etc/parallelcluster/cfnconfig
 
-mkdir /shared/vishal/script-test-folder
-cd /shared/vishal/script-test-folder
+# mkdir /shared/vishal/script-test-folder
+cd /shared/vishal/
 
 cat >> strings.text << EOF
 text
