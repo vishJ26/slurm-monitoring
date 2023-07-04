@@ -1,5 +1,5 @@
 # #!/bin/bash
-# ./etc/parallelcluster/cfnconfig
+./etc/parallelcluster/cfnconfig
 
 # s3_bucket_name=vishal-application
 # region=us-east-1
