@@ -1,32 +1,19 @@
 #!/bin/bash
-# source /etc/parallelcluster/cfnconfig
+source /etc/parallelcluster/cfnconfig
+echo "Computenode Script Start"
 
-# get post install arguments
+s3_bucket=vishal-pcluster
+region=us-east-1
+S3FileName=configs/cw-computenode.json
 
-# export S3Bucket="$2"
-# export S3Key="$3"
-# export efadminPassword="$4"
-source '/etc/parallelcluster/cfnconfig'
+cd /shared/cw-configs
 
-# export Argument1="$1"
-# export Argument2="$2"
-# export Argument2="$3"
-# export Argument4="$4"
+aws s3api get-object --bucket $s3_bucket --region $region --key $S3FileName  cw-computenode.json
 
+# replace queue name in file
+sudo sed -i "s/__QUEUE_NAME__/${cfn_scheduler_queue_name}/g"  	cw-computenode.json
 
-# echo "Argument 1 : ${Argument1}"
-# echo "Argument 2 : ${Argument2}"
-# echo "Argument 3 : ${Argument3}"
-# echo "Argument 4 : ${Argument4}"
+# add config to cloudwatch
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:cw-computenode.json
 
-
-queue_name=$cfn_scheduler_queue_name
-
-echo "Test script starts"
-
-sudo cat > /shared/vishal/dummy-file.txt << EOF
-Test File
-Created by post install script for cluster : ${stack_name}
-EOF
-
-echo "Test script ends"
+echo "Computenode Script End"
