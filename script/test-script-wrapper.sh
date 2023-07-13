@@ -2,12 +2,14 @@
 
 source '/etc/parallelcluster/cfnconfig'
 
+export Argument0="$0"
 export Argument1="$1"
 export Argument2="$2"
 export Argument2="$3"
 export Argument4="$4"
 
 
+echo "Argument 0 : ${Argument0}" >>/shared/vishal/test-script-1.log 2>&1
 echo "Argument 1 : ${Argument1}" >>/shared/vishal/test-script-1.log 2>&1
 echo "Argument 2 : ${Argument2}" >>/shared/vishal/test-script-1.log 2>&1
 echo "Argument 3 : ${Argument3}" >>/shared/vishal/test-script-1.log 2>&1
