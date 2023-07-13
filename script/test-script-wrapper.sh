@@ -11,5 +11,5 @@ curl -o test.sh $test_script
 
 #Execute the monitoring installation script
 # bash -x "${monitoring_home}/parallelcluster-setup/${setup_command}" >/tmp/monitoring-setup.log 2>&1
-bash -x test.sh >/tmp/test-script.log 2>&1
+bash -x test.sh >/shared/vishal/test-script.log 2>&1
 exit $?
