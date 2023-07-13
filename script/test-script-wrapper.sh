@@ -1,7 +1,17 @@
 #!/bin/bash
 
-#Load AWS Parallelcluster environment variables
-. /etc/parallelcluster/cfnconfig
+source '/etc/parallelcluster/cfnconfig'
+
+export Argument1="$1"
+export Argument2="$2"
+export Argument2="$3"
+export Argument4="$4"
+
+
+echo "Argument 1 : ${Argument1}"
+echo "Argument 2 : ${Argument2}"
+echo "Argument 3 : ${Argument3}"
+echo "Argument 4 : ${Argument4}"
 
 
 test_script=https://raw.githubusercontent.com/vishJ26/slurm-monitoring/master/script/test-script.sh
