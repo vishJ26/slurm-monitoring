@@ -8,10 +8,10 @@ export Argument2="$3"
 export Argument4="$4"
 
 
-echo "Argument 1 : ${Argument1}" >/shared/vishal/test-script-1.log 2>&1
-echo "Argument 2 : ${Argument2}" >/shared/vishal/test-script-1.log 2>&1
-echo "Argument 3 : ${Argument3}" >/shared/vishal/test-script-1.log 2>&1
-echo "Argument 4 : ${Argument4}" >/shared/vishal/test-script-1.log 2>&1
+echo "Argument 1 : ${Argument1}" >>/shared/vishal/test-script-1.log 2>&1
+echo "Argument 2 : ${Argument2}" >>/shared/vishal/test-script-1.log 2>&1
+echo "Argument 3 : ${Argument3}" >>/shared/vishal/test-script-1.log 2>&1
+echo "Argument 4 : ${Argument4}" >>/shared/vishal/test-script-1.log 2>&1
 
 
 test_script=https://raw.githubusercontent.com/vishJ26/slurm-monitoring/master/script/test-script.sh
