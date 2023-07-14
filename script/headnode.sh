@@ -9,7 +9,7 @@ region=us-east-1
 S3FileName=configs/cw-headnode.json
 S3FileName2=configs/fluent-bit.conf
 
-cd /shared/cw-configs
+cd /shared
 
 # APPENDING CW CONFIG
 aws s3api get-object --bucket $s3_bucket --region $region --key $S3FileName  cw-headnode.json
