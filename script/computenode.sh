@@ -8,7 +8,7 @@ s3_bucket=vishal-pcluster
 region=us-east-1
 S3FileName=configs/cw-computenode.json
 
-cd /shared/cw-configs
+cd /shared
 
 aws s3api get-object --bucket $s3_bucket --region $region --key $S3FileName  cw-computenode.json
 
