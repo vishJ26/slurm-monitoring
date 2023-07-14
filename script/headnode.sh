@@ -1,23 +1,36 @@
-# #!/bin/bash
-./etc/parallelcluster/cfnconfig
+#!/bin/bash
+source /etc/parallelcluster/cfnconfig
+echo ""
+echo ""
+echo "Headnode Script Start"
 
-# s3_bucket_name=vishal-application
-# region=us-east-1
-# S3FileName=pcluster/cw-headnode.json
-# dir=cw-configs
+s3_bucket=vishal-pcluster
+region=us-east-1
+S3FileName=configs/cw-headnode.json
+S3FileName2=configs/fluent-bit.conf
 
-# # make dir for job logs
-# mkdir /shared/logs/${stack_name}
+cd /shared/cw-configs
 
-# # dir for cloudwatch configs
-# mkdir /shared/$dir
-# cd /shared/$dir
+# APPENDING CW CONFIG
+aws s3api get-object --bucket $s3_bucket --region $region --key $S3FileName  cw-headnode.json
+# add config to cloudwatch
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:cw-headnode.json
 
-# aws s3api get-object --bucket $s3_bucket_name --region $region --key $S3FileName  cw-headnode.json
-# # replace queue name in file
-# # log_group_names="\/aws\/parallelcluster\/$(echo ${stack_name} | cut -d "-" -f2-)"
-# log_group_name="invisibl/${stack_name}"
-# echo $log_group_name
-# sed -i "s/__LOG_GROUP_NAME__/${log_group_names}/g" 	cw-headnode.json
+# UPDATING FLUENT-BIT CONFIG
+# get config for fluent bit
+aws s3api get-object --bucket $s3_bucket --region $region --key $S3FileName2  fluent-bit.conf
 
-# sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:cw-headnode.json
+# replace cluster name in fluent-bit config file
+sudo sed -i "s/__CLUSTER_NAME__/${stack_name}/g"  	fluent-bit.conf
+
+sudo cp fluent-bit.conf /etc/fluent-bit/fluent-bit.conf
+
+sudo systemctl stop fluent-bit
+sudo systemctl disable fluent-bit
+sudo systemctl daemon-reload
+
+sudo systemctl enable fluent-bit
+sudo systemctl start fluent-bit
+sudo systemctl status fluent-bit
+
+echo "Headnode Script End"
