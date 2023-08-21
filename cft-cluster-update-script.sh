@@ -2,4 +2,4 @@
 
 sudo su
 cd /data/platform/scripts/Headnode/observability
-./make-queue-dashboards
+sudo ./make-queue-dashboards
